@@ -331,12 +331,20 @@ public class Config implements Parcelable
         this.distanceFilterTimeoutMin = distanceFilterTimeoutMin;
     }
 
-    public void setDistanceFilterTimeoutMultiplier(Float distanceFilterTimeoutMultiplier) {
+    public void setDistanceFilterTimeoutMultiplier(float distanceFilterTimeoutMultiplier) {
         this.distanceFilterTimeoutMultiplier = distanceFilterTimeoutMultiplier;
     }
 
-    public void setDistanceFilterTimeoutMinSpeed(Float distanceFilterTimeoutMinSpeed) {
+    public void setDistanceFilterTimeoutMinSpeed(float distanceFilterTimeoutMinSpeed) {
         this.distanceFilterTimeoutMinSpeed = distanceFilterTimeoutMinSpeed;
+    }
+
+    public void setDistanceFilterTimeoutMultiplier(double distanceFilterTimeoutMultiplier) {
+        this.distanceFilterTimeoutMultiplier = (float) distanceFilterTimeoutMultiplier;
+    }
+
+    public void setDistanceFilterTimeoutMinSpeed(double distanceFilterTimeoutMinSpeed) {
+        this.distanceFilterTimeoutMinSpeed = (float) distanceFilterTimeoutMinSpeed;
     }
 
     public void setEnableSync(Boolean enableSync) {
