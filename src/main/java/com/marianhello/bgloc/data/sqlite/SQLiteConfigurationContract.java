@@ -18,6 +18,7 @@ public final class SQLiteConfigurationContract {
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
         public static final String COLUMN_NAME_RADIUS = "stationary_radius";
         public static final String COLUMN_NAME_DISTANCE_FILTER = "distance_filter";
+        public static final String COLUMN_NAME_DISTANCE_FILTER_DEVIDE = "distance_filter_devide";
         public static final String COLUMN_NAME_DESIRED_ACCURACY = "desired_accuracy";
         public static final String COLUMN_NAME_DEBUG = "debugging";
         public static final String COLUMN_NAME_NOTIF_TITLE = "notification_title";
@@ -46,6 +47,7 @@ public final class SQLiteConfigurationContract {
                         ConfigurationEntry._ID + " INTEGER PRIMARY KEY," +
                         ConfigurationEntry.COLUMN_NAME_RADIUS + REAL_TYPE + COMMA_SEP +
                         ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER + INTEGER_TYPE + COMMA_SEP +
+                        ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE + INTEGER_TYPE + COMMA_SEP +
                         ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY + INTEGER_TYPE + COMMA_SEP +
                         ConfigurationEntry.COLUMN_NAME_DEBUG + INTEGER_TYPE + COMMA_SEP +
                         ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE + TEXT_TYPE + COMMA_SEP +

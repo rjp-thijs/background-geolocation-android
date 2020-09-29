@@ -35,6 +35,7 @@ public class SQLiteConfigurationDAO implements ConfigurationDAO {
       ConfigurationEntry._ID,
       ConfigurationEntry.COLUMN_NAME_RADIUS,
       ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER,
+      ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE,
       ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY,
       ConfigurationEntry.COLUMN_NAME_DEBUG,
       ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE,
@@ -101,6 +102,7 @@ public class SQLiteConfigurationDAO implements ConfigurationDAO {
     Config config = Config.getDefault();
     config.setStationaryRadius(c.getFloat(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_RADIUS)));
     config.setDistanceFilter(c.getInt(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER)));
+    config.setDistanceFilterDevide(c.getInt(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE)));
     config.setDesiredAccuracy(c.getInt(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY)));
     config.setDebugging( (c.getInt(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_DEBUG)) == 1) ? true : false );
     config.setNotificationTitle(c.getString(c.getColumnIndex(ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE)));
@@ -132,6 +134,7 @@ public class SQLiteConfigurationDAO implements ConfigurationDAO {
     values.put(ConfigurationEntry._ID, 1);
     values.put(ConfigurationEntry.COLUMN_NAME_RADIUS, config.getStationaryRadius());
     values.put(ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER, config.getDistanceFilter());
+    values.put(ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE, config.getDistanceFilterDevide());
     values.put(ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY, config.getDesiredAccuracy());
     values.put(ConfigurationEntry.COLUMN_NAME_DEBUG, (config.isDebugging() == true) ? 1 : 0);
     values.put(ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE, config.getNotificationTitle());

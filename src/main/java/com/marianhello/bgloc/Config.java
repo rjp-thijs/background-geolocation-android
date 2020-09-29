@@ -35,12 +35,18 @@ public class Config implements Parcelable
     public static final int DISTANCE_FILTER_PROVIDER = 0;
     public static final int ACTIVITY_PROVIDER = 1;
     public static final int RAW_PROVIDER = 2;
+    public static final int DISTANCE_TIMED_FILTER_PROVIDER = 3;
 
     // NULL string config option to distinguish between java null
     public static final String NullString = new String();
 
     private Float stationaryRadius;
     private Integer distanceFilter;
+    private Integer distanceFilterDevide;
+    private Boolean distanceFilterTimeout;
+    private Integer distanceFilterTimeoutMin; //milliseconds
+    private Float distanceFilterTimeoutMinSpeed;
+    private Float distanceFilterTimeoutMultiplier;
     private Integer desiredAccuracy;
     private Boolean debug;
     private String notificationTitle;
@@ -59,6 +65,7 @@ public class Config implements Parcelable
     private Boolean stopOnStillActivity;
     private String url;
     private String syncUrl;
+    private Boolean enableSync;
     private Integer syncThreshold;
     private HashMap httpHeaders;
     private Integer maxLocations;
@@ -71,6 +78,11 @@ public class Config implements Parcelable
     public Config(Config config) {
         this.stationaryRadius = config.stationaryRadius;
         this.distanceFilter = config.distanceFilter;
+        this.distanceFilterDevide = config.distanceFilterDevide;
+        this.distanceFilterTimeout = config.distanceFilterTimeout;
+        this.distanceFilterTimeoutMin = config.distanceFilterTimeoutMin;
+        this.distanceFilterTimeoutMultiplier = config.distanceFilterTimeoutMultiplier;
+        this.distanceFilterTimeoutMinSpeed  = config.distanceFilterTimeoutMinSpeed;
         this.desiredAccuracy = config.desiredAccuracy;
         this.debug = config.debug;
         this.notificationTitle = config.notificationTitle;
@@ -89,6 +101,7 @@ public class Config implements Parcelable
         this.stopOnStillActivity = config.stopOnStillActivity;
         this.url = config.url;
         this.syncUrl = config.syncUrl;
+        this.enableSync  = config.enableSync;
         this.syncThreshold = config.syncThreshold;
         this.httpHeaders = CloneHelper.deepCopy(config.httpHeaders);
         this.maxLocations = config.maxLocations;
@@ -100,6 +113,11 @@ public class Config implements Parcelable
     private Config(Parcel in) {
         setStationaryRadius(in.readFloat());
         setDistanceFilter(in.readInt());
+        setDistanceFilterDevide(in.readInt());
+        setDistanceFilterTimeout((Boolean) in.readValue(null));
+        setDistanceFilterTimeoutMin(in.readInt());
+        setDistanceFilterTimeoutMultiplier(in.readFloat());
+        setDistanceFilterTimeoutMinSpeed(in.readFloat());
         setDesiredAccuracy(in.readInt());
         setDebugging((Boolean) in.readValue(null));
         setNotificationTitle(in.readString());
@@ -118,6 +136,7 @@ public class Config implements Parcelable
         setStopOnStillActivity((Boolean) in.readValue(null));
         setUrl(in.readString());
         setSyncUrl(in.readString());
+        setEnableSync((Boolean) in.readValue(null));
         setSyncThreshold(in.readInt());
         setMaxLocations(in.readInt());
         Bundle bundle = in.readBundle();
@@ -129,6 +148,11 @@ public class Config implements Parcelable
         Config config = new Config();
         config.stationaryRadius = 50f;
         config.distanceFilter = 500;
+        config.distanceFilterDevide = 2;
+        config.distanceFilterTimeout = true;
+        config.distanceFilterTimeoutMin = 5000;
+        config.distanceFilterTimeoutMultiplier = 1.5f;
+        config.distanceFilterTimeoutMinSpeed = 12f;
         config.desiredAccuracy = 100;
         config.debug = false;
         config.notificationTitle = "Background tracking";
@@ -147,6 +171,7 @@ public class Config implements Parcelable
         config.stopOnStillActivity = true;
         config.url = "";
         config.syncUrl = "";
+        config.enableSync = true;
         config.syncThreshold = 100;
         config.httpHeaders = null;
         config.maxLocations = 10000;
@@ -163,6 +188,11 @@ public class Config implements Parcelable
     public void writeToParcel(Parcel out, int flags) {
         out.writeFloat(getStationaryRadius());
         out.writeInt(getDistanceFilter());
+        out.writeInt(getDistanceFilterDevide());
+        out.writeValue(getDistanceFilterTimeout());
+        out.writeInt(getDistanceFilterTimeoutMin());
+        out.writeFloat(getDistanceFilterTimeoutMultiplier());
+        out.writeFloat(getDistanceFilterTimeoutMinSpeed());
         out.writeInt(getDesiredAccuracy());
         out.writeValue(isDebugging());
         out.writeString(getNotificationTitle());
@@ -181,6 +211,7 @@ public class Config implements Parcelable
         out.writeValue(getStopOnStillActivity());
         out.writeString(getUrl());
         out.writeString(getSyncUrl());
+        out.writeValue(getEnableSync());
         out.writeInt(getSyncThreshold());
         out.writeInt(getMaxLocations());
         Bundle bundle = new Bundle();
@@ -232,12 +263,84 @@ public class Config implements Parcelable
         return distanceFilter != null;
     }
 
+    public boolean hasDistanceFilterDevide() {
+        return distanceFilterDevide != null;
+    }
+
+    public boolean hasDistanceFilterTimeout() {
+        return distanceFilterTimeout != null;
+    }
+
+    public boolean hasDistanceFilterTimeoutMin() {
+        return distanceFilterTimeoutMin != null;
+    }
+
+    public boolean hasDistanceFilterTimeoutMultiplier() {
+        return distanceFilterTimeoutMultiplier != null;
+    }
+
+    public boolean hasDistanceFilterTimeoutMinSpeed() {
+        return distanceFilterTimeoutMinSpeed != null;
+    }
+
+    public boolean hasEnableSync() {
+        return enableSync != null;
+    }
+
     public Integer getDistanceFilter() {
         return distanceFilter;
     }
 
+    public Integer getDistanceFilterDevide() {
+        return distanceFilterDevide;
+    }
+
+    public Boolean getDistanceFilterTimeout() {
+        return distanceFilterTimeout;
+    }
+
+    public Integer getDistanceFilterTimeoutMin() {
+        return distanceFilterTimeoutMin;
+    }
+
+    public Float getDistanceFilterTimeoutMultiplier() {
+        return distanceFilterTimeoutMultiplier;
+    }
+
+    public Float getDistanceFilterTimeoutMinSpeed() {
+        return distanceFilterTimeoutMinSpeed;
+    }
+
+    public Boolean getEnableSync() {
+        return enableSync;
+    }
+
     public void setDistanceFilter(Integer distanceFilter) {
         this.distanceFilter = distanceFilter;
+    }
+
+    public void setDistanceFilterDevide(Integer distanceFilterDevide) {
+        this.distanceFilterDevide = distanceFilterDevide;
+    }
+
+    public void setDistanceFilterTimeout(Boolean distanceFilterTimeout) {
+        this.distanceFilterTimeout = distanceFilterTimeout;
+    }
+
+    public void setDistanceFilterTimeoutMin(Integer distanceFilterTimeoutMin) {
+        this.distanceFilterTimeoutMin = distanceFilterTimeoutMin;
+    }
+
+    public void setDistanceFilterTimeoutMultiplier(Float distanceFilterTimeoutMultiplier) {
+        this.distanceFilterTimeoutMultiplier = distanceFilterTimeoutMultiplier;
+    }
+
+    public void setDistanceFilterTimeoutMinSpeed(Float distanceFilterTimeoutMinSpeed) {
+        this.distanceFilterTimeoutMinSpeed = distanceFilterTimeoutMinSpeed;
+    }
+
+    public void setEnableSync(Boolean enableSync) {
+        this.enableSync = enableSync;
     }
 
     public boolean hasDebug() {
@@ -524,6 +627,11 @@ public class Config implements Parcelable
     public String toString () {
         return new StringBuffer()
                 .append("Config[distanceFilter=").append(getDistanceFilter())
+                .append(" distanceFilterDevide=").append(getDistanceFilterDevide())
+                .append(" distanceFilterTimeout=").append(getDistanceFilterTimeout())
+                .append(" distanceFilterTimeoutMin=").append(getDistanceFilterTimeoutMin())
+                .append(" distanceFilterTimeoutMinSpeed=").append(getDistanceFilterTimeoutMinSpeed())
+                .append(" distanceFilterTimeoutMultiplier=").append(getDistanceFilterTimeoutMultiplier())
                 .append(" stationaryRadius=").append(getStationaryRadius())
                 .append(" desiredAccuracy=").append(getDesiredAccuracy())
                 .append(" interval=").append(getInterval())
@@ -543,6 +651,7 @@ public class Config implements Parcelable
                 .append(" nIconColor=").append(getNotificationIconColor())
                 .append(" url=").append(getUrl())
                 .append(" syncUrl=").append(getSyncUrl())
+                .append(" enableSync=").append(getEnableSync())
                 .append(" syncThreshold=").append(getSyncThreshold())
                 .append(" httpHeaders=").append(getHttpHeaders().toString())
                 .append(" maxLocations=").append(getMaxLocations())
@@ -572,6 +681,21 @@ public class Config implements Parcelable
         }
         if (config2.hasDistanceFilter()) {
             merger.setDistanceFilter(config2.getDistanceFilter());
+        }
+        if (config2.hasDistanceFilterDevide()) {
+            merger.setDistanceFilterDevide(config2.getDistanceFilterDevide());
+        }
+        if (config2.hasDistanceFilterTimeout()) {
+            merger.setDistanceFilterTimeout(config2.getDistanceFilterTimeout());
+        }
+        if (config2.hasDistanceFilterTimeoutMin()) {
+            merger.setDistanceFilterTimeoutMin(config2.getDistanceFilterTimeoutMin());
+        }
+        if (config2.hasDistanceFilterTimeoutMultiplier()) {
+            merger.setDistanceFilterTimeoutMultiplier(config2.getDistanceFilterTimeoutMultiplier());
+        }
+        if (config2.hasDistanceFilterTimeoutMinSpeed()) {
+            merger.setDistanceFilterTimeoutMinSpeed(config2.getDistanceFilterTimeoutMinSpeed());
         }
         if (config2.hasDesiredAccuracy()) {
             merger.setDesiredAccuracy(config2.getDesiredAccuracy());
@@ -626,6 +750,9 @@ public class Config implements Parcelable
         }
         if (config2.hasSyncUrl()) {
             merger.setSyncUrl(config2.getSyncUrl());
+        }
+        if (config2.hasEnableSync()) {
+            merger.setEnableSync(config2.getEnableSync());
         }
         if (config2.hasSyncThreshold()) {
             merger.setSyncThreshold(config2.getSyncThreshold());

@@ -38,6 +38,7 @@ public class SQLiteOpenHelper10 extends android.database.sqlite.SQLiteOpenHelper
                     ConfigurationEntry._ID + " INTEGER PRIMARY KEY," +
                     ConfigurationEntry.COLUMN_NAME_RADIUS + REAL_TYPE + COMMA_SEP +
                     ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER + INTEGER_TYPE + COMMA_SEP +
+                    ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE + INTEGER_TYPE + COMMA_SEP +
                     ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY + INTEGER_TYPE + COMMA_SEP +
                     ConfigurationEntry.COLUMN_NAME_DEBUG + INTEGER_TYPE + COMMA_SEP +
                     ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE + TEXT_TYPE + COMMA_SEP +

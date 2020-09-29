@@ -49,6 +49,7 @@ public class SQLiteConfigurationDAOTest {
         config.setActivitiesInterval(1000);
         config.setDesiredAccuracy(200);
         config.setDistanceFilter(300);
+        config.setDistanceFilterDevide(2);
         config.setFastestInterval(5000);
         config.setInterval(10000);
         config.setLocationProvider(0);
@@ -80,6 +81,7 @@ public class SQLiteConfigurationDAOTest {
             Assert.assertEquals(1000, storedConfig.getActivitiesInterval().intValue());
             Assert.assertEquals(200, storedConfig.getDesiredAccuracy().intValue());
             Assert.assertEquals(300, storedConfig.getDistanceFilter().intValue());
+            Assert.assertEquals(2, storedConfig.getDistanceFilterDevide().intValue());
             Assert.assertEquals(5000, storedConfig.getFastestInterval().intValue());
             Assert.assertEquals(10000, storedConfig.getInterval().intValue());
             Assert.assertEquals(0, storedConfig.getLocationProvider().intValue());
