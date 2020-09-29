@@ -61,6 +61,7 @@ public class SQLiteOpenHelperTest {
         config.setActivitiesInterval(1000);
         config.setDesiredAccuracy(200);
         config.setDistanceFilter(300);
+        config.setDistanceFilterDevide(2);
         config.setFastestInterval(5000);
         config.setInterval(10000);
         config.setLocationProvider(0);
@@ -96,6 +97,7 @@ public class SQLiteOpenHelperTest {
         ContentValues configValues = new ContentValues();
         configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_RADIUS, config.getStationaryRadius());
         configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER, config.getDistanceFilter());
+        configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE, config.getDistanceFilterDevide());
         configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY, config.getDesiredAccuracy());
         configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DEBUG, (config.isDebugging() == true) ? 1 : 0);
         configValues.put(SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE, config.getNotificationTitle());
@@ -172,6 +174,7 @@ public class SQLiteOpenHelperTest {
 
         Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_RADIUS)));
         Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER)));
+        Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DISTANCE_FILTER_DEVIDE)));
         Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DESIRED_ACCURACY)));
         Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_DEBUG)));
         Assert.assertTrue(columnNames.contains((SQLiteConfigurationContract.ConfigurationEntry.COLUMN_NAME_NOTIF_TITLE)));

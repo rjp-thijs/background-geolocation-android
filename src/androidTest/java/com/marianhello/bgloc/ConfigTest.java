@@ -26,6 +26,7 @@ public class ConfigTest {
 
         Assert.assertEquals(config.getStationaryRadius(), configFromParcel.getStationaryRadius());
         Assert.assertEquals(config.getDistanceFilter(), configFromParcel.getDistanceFilter());
+        Assert.assertEquals(config.getDistanceFilterDevide(), configFromParcel.getDistanceFilterDevide());
         Assert.assertEquals(config.getDesiredAccuracy(), configFromParcel.getDesiredAccuracy());
         Assert.assertFalse(config.isDebugging());
         Assert.assertEquals(config.getNotificationTitle(), configFromParcel.getNotificationTitle());

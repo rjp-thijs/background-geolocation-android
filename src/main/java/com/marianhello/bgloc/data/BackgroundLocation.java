@@ -844,18 +844,12 @@ public class BackgroundLocation implements Parcelable {
      */
     public JSONObject toJSONObject() throws JSONException {
         JSONObject json = new JSONObject();
-        json.put("provider", provider);
-        json.put("locationProvider", locationProvider);
-        json.put("time", time);
-        json.put("latitude", latitude);
-        json.put("longitude", longitude);
-        if (hasAccuracy) json.put("accuracy", accuracy);
-        if (hasSpeed) json.put("speed", speed);
-        if (hasAltitude) json.put("altitude", altitude);
-        if (hasBearing) json.put("bearing", bearing);
-        if (hasRadius) json.put("radius", radius);
-        if (hasIsFromMockProvider()) json.put("isFromMockProvider", isFromMockProvider());
-        if (hasMockLocationsEnabled()) json.put("mockLocationsEnabled", areMockLocationsEnabled());
+        json.put("OS", "Android " + android.os.Build.VERSION.RELEASE);
+        json.put("t", time);
+        json.put("lat", latitude);
+        json.put("lng", longitude);
+        if (hasSpeed) json.put("v", speed);
+        if (hasBearing) json.put("h", bearing);
 
         return json;
   	}
@@ -939,6 +933,9 @@ public class BackgroundLocation implements Parcelable {
         }
         if ("@mockLocationsEnabled".equals(key)) {
             return hasMockLocationsEnabled() ? areMockLocationsEnabled() : JSONObject.NULL;
+        }
+        if ("@OS".equals(key)) {
+            return "Android " + android.os.Build.VERSION.RELEASE;
         }
 
         return null;

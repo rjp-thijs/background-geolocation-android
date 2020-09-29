@@ -100,6 +100,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter implements HttpPost
             return;
         }
 
+        if (!config.getEnableSync()) return;
+
         //noinspection ConstantConditions
         notificationsEnabled = !config.hasNotificationsEnabled() || config.getNotificationsEnabled();
 
