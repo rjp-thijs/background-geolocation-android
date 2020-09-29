@@ -509,10 +509,10 @@ public class DistanceTimeFilterLocationProvider extends AbstractLocationProvider
         try {
             locationManager.removeUpdates(this);
             criteria.setAccuracy(Criteria.ACCURACY_FINE);
-            criteria.setHorizontalAccuracy(translateDesiredAccuracy(config.getDesiredAccuracy()));
+            criteria.setHorizontalAccuracy(translateDesiredAccuracy(mConfig.getDesiredAccuracy()));
             criteria.setPowerRequirement(Criteria.POWER_HIGH);
 
-            locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), config.getInterval(), scaledDistanceFilter, this);
+            locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), mConfig.getInterval(), scaledDistanceFilter, this);
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());
             this.handleSecurityException(e);
