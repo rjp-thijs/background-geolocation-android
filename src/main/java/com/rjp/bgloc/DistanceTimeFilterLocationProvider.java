@@ -106,6 +106,9 @@ public class DistanceTimeFilterLocationProvider extends AbstractLocationProvider
         stationaryLocationPollingPI = PendingIntent.getBroadcast(mContext, 0, new Intent(STATIONARY_LOCATION_MONITOR_ACTION), 0);
         registerReceiver(stationaryLocationMonitorReceiver, new IntentFilter(STATIONARY_LOCATION_MONITOR_ACTION));
 
+        singleUpdateGpsPI = PendingIntent.getBroadcast(mContext, 0, new Intent(SINGLE_LOCATION_GPS_UPDATE_ACTION), PendingIntent.FLAG_CANCEL_CURRENT);
+        registerReceiver(singleUpdateGpsReceiver, new IntentFilter(SINGLE_LOCATION_GPS_UPDATE_ACTION));
+
         // One-shot PI (TODO currently unused)
         singleUpdatePI = PendingIntent.getBroadcast(mContext, 0, new Intent(SINGLE_LOCATION_UPDATE_ACTION), PendingIntent.FLAG_CANCEL_CURRENT);
         registerReceiver(singleUpdateReceiver, new IntentFilter(SINGLE_LOCATION_UPDATE_ACTION));
